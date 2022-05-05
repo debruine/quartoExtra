@@ -21,4 +21,4 @@ devtools::install_github("debruine/quartoExtra")
 
 Since this only works with quarto projects (not github readmes or
 pkgdown sites), see the [Quarto
-Demo](https://debrune.github.io/quarto_demo) website for examples.
+Demo](https://debruine.github.io/quarto_demo) website for examples.
