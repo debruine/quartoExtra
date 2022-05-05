@@ -2,9 +2,13 @@
 #'
 #' @name quartoExtra
 #' @aliases quartoExtra-package
-#' @import utils
 #' @importFrom knitr asis_output knit_print
 NULL
+
+.pkgglobalenv <- new.env(parent=emptyenv())
+
+rmd_knit_print_df <- utils::getFromNamespace("knit_print.data.frame", "rmarkdown")
+rmd_print_paged <- utils::getFromNamespace("print.paged_df", "rmarkdown")
 
 .onLoad <- function(...) {
   registerS3method("knit_print", "ggplot", knit_print.ggplot)
@@ -13,7 +17,6 @@ NULL
   # set default options
   op <- options()
   op.qe <- list(
-    quartoExtra.darkmode = FALSE,
     quartoExtra.df_print = NULL
   )
   toset <- !(names(op.qe) %in% names(op))
@@ -23,22 +26,16 @@ NULL
 }
 
 .onAttach <- function(libname, pkgname) {
-  # sm = paste(
-  #   "\n************",
-  #   "Welcome to quartoExtra",
-  #   "Turn off dark mode toggling with options(quartoExtra.darkmode = FALSE)",
-  #   "Set df_print to \"kable\" or \"paged\" with options(quartoExtra.df_print = \"kable\")",
-  #   "************",
-  #   sep = "\n"
-  # )
-  #
-  # packageStartupMessage(sm)
+  dark = ggthemes::theme_solarized(light=FALSE)
+  light = ggthemes::theme_solarized(light=TRUE)
+  assign("dark_theme", dark, envir=.pkgglobalenv)
+  assign("light_theme", light, envir=.pkgglobalenv)
 }
 
 unregister_S3 = function() {
   if (!('knitr' %in% loadedNamespaces())) return()
   objs = ls(asNamespace('quartoExtra'))
-  s3env = getFromNamespace('.__S3MethodsTable__.', 'knitr')
+  s3env = utils::getFromNamespace('.__S3MethodsTable__.', 'knitr')
   rm(list = intersect(objs, ls(s3env)), envir = s3env)
 }
 

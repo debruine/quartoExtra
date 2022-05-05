@@ -12,13 +12,12 @@
 #' @return NULL
 #' @export
 #'
-darkmode_setup <- function(
-    light_theme = "flatly",
-    dark_theme = "darkly",
-    quarto_yml = "_quarto.yml",
-    light_scss = "light.scss",
-    dark_scss = "dark.scss",
-    type = c("website", "book")) {
+darkmode_setup <- function(light_theme = "flatly",
+                           dark_theme = "darkly",
+                           quarto_yml = "_quarto.yml",
+                           light_scss = "light.scss",
+                           dark_scss = "dark.scss",
+                           type = c("website", "book")) {
   type = match.arg(type)
 
   # create or update yml
@@ -61,17 +60,10 @@ darkmode_setup <- function(
     message("Setup updated at ", quarto_yml)
   }
 
-  # create or update dark theme
+  ## create or update dark theme ----
   if (!file.exists(dark_scss)) {
-    dark_text <-  paste(sep = "\n",
-      "/*-- scss:defaults --*/",
-      "",
-      "/*-- scss:rules --*/",
-      ".light-mode { display: none; }",
-      ".dark-mode { display: block; }",
-      ""
-    )
-
+    dark_template <- system.file("dark.scss", package = "quartoExtra")
+    dark_text <-  readLines(dark_template, warn = FALSE)
     write(dark_text, dark_scss)
     message("Dark theme created at ", dark_scss)
   } else {
@@ -97,17 +89,10 @@ darkmode_setup <- function(
     }
   }
 
-  # create or update light theme
+  ## create or update light theme ----
   if (!file.exists(light_scss)) {
-    light_text <-  paste(sep = "\n",
-                        "/*-- scss:defaults --*/",
-                        "",
-                        "/*-- scss:rules --*/",
-                        ".light-mode { display: block; }",
-                        ".dark-mode { display: none; }",
-                        ""
-    )
-
+    light_template <- system.file("light.scss", package = "quartoExtra")
+    light_text <-  readLines(light_template, warn = FALSE)
     write(light_text, light_scss)
     message("Light theme created at ", dark_scss)
   } else {
@@ -132,4 +117,22 @@ darkmode_setup <- function(
       message("Light theme updated at ", dark_scss)
     }
   }
+}
+
+
+
+#' Set the dark and light ggplot themes for darkmode
+#'
+#' @param dark the dark theme
+#' @param light the light theme
+#'
+#' @return NULL
+#' @export
+#'
+darkmode_theme_set <- function(dark = ggthemes::theme_solarized(light=FALSE),
+                               light = ggthemes::theme_solarized(light=TRUE)) {
+  assign("dark_theme", dark, envir=.pkgglobalenv)
+  assign("light_theme", light, envir=.pkgglobalenv)
+
+  invisible()
 }

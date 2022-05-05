@@ -2,6 +2,6 @@
 
 S3method(knit_print,ggplot)
 export(darkmode_setup)
-import(utils)
+export(darkmode_theme_set)
 importFrom(knitr,asis_output)
 importFrom(knitr,knit_print)

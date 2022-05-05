@@ -11,15 +11,15 @@ knit_print.data.frame <- function (x, options, ...) {
   df_print <- options("quartoExtra.df_print")[[1]]
 
   if (is.null(df_print)) {
-    rmarkdown:::knit_print.data.frame(x, options, ...)
+    rmd_knit_print_df(x, options, ...)
   } else if (df_print == "paged") {
-    rmarkdown::paged_table(x, options) |>
-      rmarkdown:::print.paged_df()
+    x <- rmarkdown::paged_table(x, options)
+    rmd_print_paged(x)
   } else if (df_print == "kable") {
-    knitr::kable(x) |>
-      knitr::knit_print(options, ...)
+    x <- knitr::kable(x)
+    knitr::knit_print(x, options, ...)
   } else {
-    rmarkdown:::knit_print.data.frame(x, options, ...)
+    rmd_knit_print_df(x, options, ...)
   }
 }
 
