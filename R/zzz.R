@@ -10,6 +10,10 @@ NULL
 rmd_knit_print_df <- utils::getFromNamespace("knit_print.data.frame", "rmarkdown")
 rmd_print_paged <- utils::getFromNamespace("print.paged_df", "rmarkdown")
 
+# is this a good idea?
+knitr::knit_hooks$restore()
+chunk_hook <- knitr::knit_hooks$get("chunk")
+
 .onLoad <- function(...) {
   knitr::knit_hooks$set(chunk = darkmode_hook)
 

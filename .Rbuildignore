@@ -1,5 +1,5 @@
 ^quartoExtra\.Rproj$
 ^\.Rproj\.user$
 ^LICENSE\.md$
-^stuff/*
 ^README\.Rmd$
+^\.github$
