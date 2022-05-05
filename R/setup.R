@@ -91,8 +91,8 @@ darkmode_setup <- function(
         ".light-mode { display: none; }",
         ".dark-mode { display: block; }",
         orig_scss[(rules_start+1):length(orig_scss)]
-      ) %>% paste(collapse = "\n")
-      write(new_scss, dark_scss)
+      )
+      write(paste(new_scss, collapse = "\n"), dark_scss)
       message("Dark theme updated at ", dark_scss)
     }
   }
@@ -127,8 +127,8 @@ darkmode_setup <- function(
         ".light-mode { display: none; }",
         ".dark-mode { display: block; }",
         orig_scss[(rules_start+1):length(orig_scss)]
-      ) %>% paste(collapse = "\n")
-      write(new_scss, light_scss)
+      )
+      write(paste(new_scss, collapse = "\n"), light_scss)
       message("Light theme updated at ", dark_scss)
     }
   }

@@ -1,9 +1,0 @@
-[
-  {
-    "objectID": "test.html",
-    "href": "test.html",
-    "title": "quartoExtra",
-    "section": "",
-    "text": "Test\n\nlibrary(ggplot2)\nlibrary(quartoExtra)\nadd_darkmode_ggplots()\n\n\ng <- ggplot(diamonds, aes(x = cut, y = price, fill = cut)) +\n  geom_violin()\n\ng"
-  }
-]
