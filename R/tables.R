@@ -5,7 +5,7 @@
 #' @param ... additional arguments to be passed onto print()
 #'
 #' @return html for kable or paged tables
-#' @export
+#' @keywords internal
 #'
 knit_print.data.frame <- function (x, options, ...) {
   df_print <- options("quartoExtra.df_print")[[1]]

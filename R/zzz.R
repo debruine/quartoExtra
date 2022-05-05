@@ -8,7 +8,6 @@ NULL
 
 .onLoad <- function(...) {
   registerS3method("knit_print", "ggplot", knit_print.ggplot)
-  registerS3method("print", "ggplot", print.ggplot)
   registerS3method("knit_print", "data.frame", knit_print.data.frame)
 
   # set default options

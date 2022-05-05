@@ -19,3 +19,4 @@ html for kable or paged tables
 \description{
 Print tables in kable or paged formats
 }
+\keyword{internal}

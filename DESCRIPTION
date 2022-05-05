@@ -28,6 +28,7 @@ Imports:
     ggthemes,
     ggplot2,
     knitr,
-    rmarkdown
+    rmarkdown,
+    yaml
 URL: https://github.com/debruine/quartoExtra
 BugReports: https://github.com/debruine/quartoExtra/issues

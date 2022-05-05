@@ -8,7 +8,7 @@ format:
     theme:
       light:
       - flatly
-      - inst/light.scss
+      - light.scss
       dark:
       - darkly
-      - inst/dark.scss
+      - dark.scss
