@@ -1,0 +1,11 @@
+project:
+  type: website
+  output-dir: docs
+
+format:
+  html:
+    theme:
+      light: [flatly, light.scss]
+      dark: [darkly, dark.scss]
+
+

@@ -1,0 +1,16 @@
+{
+  "hash": "54d9ad2bb599392d1660ce29914aaec9",
+  "result": {
+    "markdown": "# Test\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(ggplot2)\nlibrary(quartoExtra)\nadd_darkmode_ggplots()\n```\n:::\n\n\n::: {.cell}\n\n```{.r .cell-code}\ng <- ggplot(diamonds, aes(x = cut, y = price, fill = cut)) +\n  geom_violin()\n```\n:::\n\n\n```{.r .cell-code}\ng\n```\n\n\n<div class=\"dark-mode\">\n::: {.cell-output-display}\n![](test_files/figure-html/unnamed-chunk-3-1.png){width=672}\n:::\n\n</div>\n<div class=\"light-mode\">\n::: {.cell-output-display}\n![](test_files/figure-html/unnamed-chunk-3-2.png){width=672}\n:::\n\n</div>\n\n\n",
+    "supporting": [
+      "test_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": [],
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": null
+  }
+}

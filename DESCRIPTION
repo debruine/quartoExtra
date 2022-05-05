@@ -1,0 +1,31 @@
+Package: quartoExtra
+Title: Extra Stuff for Quarto
+Version: 0.0.0.9000
+Authors@R: 
+    c(person(
+        given = "Lisa", 
+        family = "DeBruine", 
+        role = c("aut", "cre"), 
+        email = "debruine@gmail.com", 
+        comment = c(ORCID = "0000-0002-7523-5539")
+    ),
+    person(
+        given = "Marc-Aurèle",
+        family = "Rivière",
+        role = c("aut"),
+        email = "",
+        comment = c(ORCID = "0000-0002-5108-3382")
+    ))
+Description: Fixes annoyances with quarto.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.2
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+Imports: 
+    ggthemes,
+    ggplot2,
+    knitr,
+    rmarkdown

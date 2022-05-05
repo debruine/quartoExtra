@@ -1,0 +1,20 @@
+# Test
+
+```{r}
+library(ggplot2)
+library(quartoExtra)
+add_darkmode_ggplots()
+```
+
+
+```{r}
+g <- ggplot(diamonds, aes(x = cut, y = price, fill = cut)) +
+  geom_violin()
+```
+
+```{r, results='asis'}
+g
+```
+
+
+
