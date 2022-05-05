@@ -7,6 +7,7 @@
 #' @param quarto_yml the location of the _quarto.yml file
 #' @param light_scss the location of the custom scss file for the light theme
 #' @param dark_scss the location of the custom scss file for the dark theme
+#' @param default whether the light or dark theme is the default
 #' @param type the type of quarto document ("website" or "book")
 #'
 #' @return NULL
@@ -17,6 +18,7 @@ darkmode_setup <- function(light_theme = "flatly",
                            quarto_yml = "_quarto.yml",
                            light_scss = "light.scss",
                            dark_scss = "dark.scss",
+                           default = "light",
                            type = c("website", "book")) {
   type = match.arg(type)
 
@@ -32,14 +34,19 @@ darkmode_setup <- function(light_theme = "flatly",
       ),
       format = list(
         html = list(
-          theme = list(
-            light = c(light_theme, light_scss),
-            dark = c(dark_theme, dark_scss)
-          )
+          theme = list()
         )
       )
     )
     names(template_yml)[2] <- type
+
+    if (default == "light") {
+      template_yml$format$html$theme$light <- c(light_theme, light_scss)
+      template_yml$format$html$theme$dark <- c(dark_theme, dark_scss)
+    } else {
+      template_yml$format$html$theme$dark <- c(dark_theme, dark_scss)
+      template_yml$format$html$theme$light <- c(light_theme, light_scss)
+    }
 
     yaml::write_yaml(template_yml, quarto_yml)
     message("Setup created at ", quarto_yml)
@@ -54,16 +61,23 @@ darkmode_setup <- function(light_theme = "flatly",
       orig_yml$format$html$theme <-list()
     }
 
-    orig_yml$format$html$theme$light <- c(light_theme, light_scss)
-    orig_yml$format$html$theme$dark <- c(dark_theme, dark_scss)
+    if (default == "light") {
+      orig_yml$format$html$theme$light <- c(light_theme, light_scss)
+      orig_yml$format$html$theme$dark <- c(dark_theme, dark_scss)
+    } else {
+      orig_yml$format$html$theme$dark <- c(dark_theme, dark_scss)
+      orig_yml$format$html$theme$light <- c(light_theme, light_scss)
+    }
+
     yaml::write_yaml(orig_yml, quarto_yml)
     message("Setup updated at ", quarto_yml)
   }
 
   ## create or update dark theme ----
+  dark_template <- system.file("dark.scss", package = "quartoExtra")
+  dark_text <-  readLines(dark_template, warn = FALSE)
+
   if (!file.exists(dark_scss)) {
-    dark_template <- system.file("dark.scss", package = "quartoExtra")
-    dark_text <-  readLines(dark_template, warn = FALSE)
     write(dark_text, dark_scss)
     message("Dark theme created at ", dark_scss)
   } else {
@@ -80,8 +94,7 @@ darkmode_setup <- function(light_theme = "flatly",
     } else {
       new_scss <- c(
         orig_scss[1:rules_start],
-        ".light-mode { display: none; }",
-        ".dark-mode { display: block; }",
+        dark_text[4:length(dark_text)],
         orig_scss[(rules_start+1):length(orig_scss)]
       )
       write(paste(new_scss, collapse = "\n"), dark_scss)
@@ -90,9 +103,10 @@ darkmode_setup <- function(light_theme = "flatly",
   }
 
   ## create or update light theme ----
+  light_template <- system.file("light.scss", package = "quartoExtra")
+  light_text <-  readLines(light_template, warn = FALSE)
+
   if (!file.exists(light_scss)) {
-    light_template <- system.file("light.scss", package = "quartoExtra")
-    light_text <-  readLines(light_template, warn = FALSE)
     write(light_text, light_scss)
     message("Light theme created at ", dark_scss)
   } else {
@@ -109,8 +123,7 @@ darkmode_setup <- function(light_theme = "flatly",
     } else {
       new_scss <- c(
         orig_scss[1:rules_start],
-        ".light-mode { display: none; }",
-        ".dark-mode { display: block; }",
+        light_text[4:length(light_text)],
         orig_scss[(rules_start+1):length(orig_scss)]
       )
       write(paste(new_scss, collapse = "\n"), light_scss)

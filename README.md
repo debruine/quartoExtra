@@ -4,6 +4,8 @@
 # quartoExtra
 
 <!-- badges: start -->
+
+[![R-CMD-check](https://github.com/debruine/quartoExtra/workflows/R-CMD-check/badge.svg)](https://github.com/debruine/quartoExtra/actions)
 <!-- badges: end -->
 
 The goal of quartoExtra is to collect upgrades to quarto, such as

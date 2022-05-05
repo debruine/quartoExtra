@@ -10,6 +10,7 @@ darkmode_setup(
   quarto_yml = "_quarto.yml",
   light_scss = "light.scss",
   dark_scss = "dark.scss",
+  default = "light",
   type = c("website", "book")
 )
 }
@@ -23,6 +24,8 @@ darkmode_setup(
 \item{light_scss}{the location of the custom scss file for the light theme}
 
 \item{dark_scss}{the location of the custom scss file for the dark theme}
+
+\item{default}{whether the light or dark theme is the default}
 
 \item{type}{the type of quarto document ("website" or "book")}
 }
