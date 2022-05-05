@@ -11,6 +11,14 @@ rmd_knit_print_df <- utils::getFromNamespace("knit_print.data.frame", "rmarkdown
 rmd_print_paged <- utils::getFromNamespace("print.paged_df", "rmarkdown")
 
 .onLoad <- function(...) {
+  knitr::knit_hooks$set(chunk = darkmode_hook)
+
+  # set default themes
+  dark = ggthemes::theme_solarized(light=FALSE)
+  light = ggthemes::theme_solarized(light=TRUE)
+  assign("dark_theme", dark, envir=.pkgglobalenv)
+  assign("light_theme", light, envir=.pkgglobalenv)
+
   registerS3method("knit_print", "ggplot", knit_print.ggplot)
   registerS3method("knit_print", "data.frame", knit_print.data.frame)
 
@@ -23,13 +31,6 @@ rmd_print_paged <- utils::getFromNamespace("print.paged_df", "rmarkdown")
   if(any(toset)) options(op.qe[toset])
 
   invisible()
-}
-
-.onAttach <- function(libname, pkgname) {
-  dark = ggthemes::theme_solarized(light=FALSE)
-  light = ggthemes::theme_solarized(light=TRUE)
-  assign("dark_theme", dark, envir=.pkgglobalenv)
-  assign("light_theme", light, envir=.pkgglobalenv)
 }
 
 unregister_S3 = function() {

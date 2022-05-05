@@ -1,0 +1,14 @@
+::: {.cell .dark-light}
+
+```{.r .cell-code}
+ggplot2::ggplot()
+```
+
+::: {.cell-output-display}
+![](test_files/figure-html/unnamed-chunk-2-1.png){width=672}
+:::
+
+::: {.cell-output-display}
+![](test_files/figure-html/unnamed-chunk-2-2.png){width=672}
+:::
+:::
