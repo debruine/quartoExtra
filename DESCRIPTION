@@ -29,3 +29,5 @@ Imports:
     ggplot2,
     knitr,
     rmarkdown
+URL: https://github.com/debruine/quartoExtra
+BugReports: https://github.com/debruine/quartoExtra/issues
