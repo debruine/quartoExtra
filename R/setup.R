@@ -53,7 +53,7 @@ darkmode_setup <- function(light_theme = "flatly",
   } else {
     orig_yml <- yaml::read_yaml(quarto_yml)
 
-    if (!is.list(orig_yml$format) &
+    if (!is.list(orig_yml$format) &&
         orig_yml$format == "html") {
       orig_yml$format <- list(html = list())
     }
